@@ -7,36 +7,46 @@ Custom PROINFO binary partition for recover Serial Number losed meanwhile doing 
  * bq Aquaris M10 FHD
  * bq Aquaris M10 LTE
 
+
+WHAT IS write_sn?
+=================
+ * Is a custom binary which source have been written in golang by @coyuya, which modifies PROINFO_BQ_MX.bin writing your serial number in it.<br>
+
+
 WHAT IS NEEDED?
 ===============
 
- * An hex-editor. (For example wxHexEditor)
+ * A computer with Windows or Linux.
+ * A CMD or Terminal.
  * TWRP for flashing the partition, since we will use dd.
  * Have serial number writen on a paper or the tablet with you.
 
-HOW TO MODIFY PROINFO AND WRITE OUR SN AT IT?
-=============================================
+HOW TO USE WRITE_SN?
+===========================================================================
 
- - 1º Download <a href="https://raw.githubusercontent.com/jmpfbmx/proinfo_bq_Aquaris_MX_Tablets/master/PROINFO_BQ_MX.bin">PROINFO_BQ_MX.bin</a>
+ <h4>LINUX:</h4>
 
- - 2º Open your hex-editor and load PROINFO_BQ_MX.bin
+ - 1º Clone proinfo_bq_Aquaris_MX_Tablets or download it from github and extract it.
+    ```
+    git clone -b go https://github.com/jmpfbmx/proinfo_bq_Aquaris_MX_Tablets && cd proinfo_bq_Aquaris_MX_Tablets
+    ```
 
- - 3º Modify the following values:<br>
-   ![1st_IMAGE](https://i.imgur.com/5FPglKA.jpeg)
+ - 2º Give correct permissions to write_sn binary:
+    ```
+    chmod 777 write_sn
+    ```
 
- - 4º In the case of our Serial Number is FA123456, we need to replace 30 values and set the following:
-   * F == 46
-   * A == 41
-   * 1 == 31
-   * 2 == 32
-   * 3 == 33
-   * 4 == 34
-   * 5 == 35
-   * 6 == 36<br>
+ - 3º Execute it:<br>
+    ```
+    ./write_sn
+    ```
+   ![1st_IMAGE](https://i.imgur.com/y5zstit.png)
 
-    ![2nd_IMAGE](https://i.imgur.com/priDwnZ.png)
+ - 4º Write our Serial Number (For example: FA123456):<br>
 
- - 5º Save the modifications done at PROINFO_BQ_MX.bin and copy it to your tablet.
+    ![2nd_IMAGE](https://i.imgur.com/XOqI7wJ.png)
+
+ - 5º Copy PROINFO_BQ_MX.bin to your tablet.
  
  - 6º Reboot to TWRP and flash it:
 
@@ -74,9 +84,60 @@ HOW TO MODIFY PROINFO AND WRITE OUR SN AT IT?
         dd if=/PATH/PROINFO_BQ_MX.bin of=/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/proinfo
         ```
 
-## Author:
+ <h4>WINDOWS:</h4>
+
+ - 1º Clone proinfo_bq_Aquaris_MX_Tablets or download it from github and extract it.
+
+ - 2º Open a CMD at proinfo_bq_Aquaris_MX_Tablets folder
+
+ - 3º Execute write_sn:<br>
+    ```
+    .\write_sn.exe
+    ```
+   ![1st_IMAGE](https://i.imgur.com/HmIEzWY.png)
+
+ - 4º Write our Serial Number (For example: FA123456):<br>
+
+    ![2nd_IMAGE](https://i.imgur.com/K7EW8rq.png)
+
+ - 5º Copy PROINFO_BQ_MX.bin to your tablet.
+ 
+ - 6º Reboot to TWRP and flash it:
+
+   IMPORTANT NOTICE:<br>
+     IF YOU COPIED TO SDCARD CHANGE PATH WITH /sdcard, IF YOU COPIED TO EXTERNAL SD CHANGE <PATH> WITH /external_sd
+
+   * bq Aquaris M8:<br>
+        ```
+        adb shell
+        dd if=/PATH/PROINFO_BQ_MX.bin of=/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/proinfo
+        ```
+
+   * bq Aquaris M10 HD:<br>
+      OFFICIAL TWRP (LP AND MM FW):<br>
+        ```
+        adb shell
+        dd if=/PATH/PROINFO_BQ_MX.bin of=/dev/block/platform/mtk-msdc.0/by-name/proinfo
+        ```
+
+      UNOFFICIAL TWRP (OREO FW):<br>
+        ```
+        adb shell
+        dd if=/PATH/PROINFO_BQ_MX.bin of=/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/proinfo
+        ```
+
+   * bq Aquaris M10 FHD:<br>
+        ```
+        adb shell
+        dd if=/PATH/PROINFO_BQ_MX.bin of=/dev/block/platform/mtk-msdc.0/by-name/proinfo
+        ```
+
+   * bq Aquaris M10 4G:<br>
+        ```
+        adb shell
+        dd if=/PATH/PROINFO_BQ_MX.bin of=/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/proinfo
+        ```
+
+## Authors:
  - JMPFBMX
  - coyuya
-
-### Help:
- * If you need help, if you don't know which is the value of some letter or if you don't know how to do it, open a github issue.
