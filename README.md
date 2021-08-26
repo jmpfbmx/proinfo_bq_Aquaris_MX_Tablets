@@ -76,6 +76,7 @@ HOW TO MODIFY PROINFO AND WRITE OUR SN AT IT?
 
 ## Author:
  - JMPFBMX
+ - coyuya
 
 ### Help:
  * If you need help, if you don't know which is the value of some letter or if you don't know how to do it, open a github issue.
